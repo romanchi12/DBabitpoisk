@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "applies")
 public class ApplyDAO {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "apply_id")
     private int applyId;
     @Column(name = "place")
@@ -26,7 +27,7 @@ public class ApplyDAO {
     @Column(name = "extra_baly")
     private double extraBaly;
 
-    public ApplyDAO( int place, String pib, String priority, double bal, double atestat, double zno, double extraBaly, SpecialityDAO speciality) {
+    public ApplyDAO( int place, String pib, String priority, double bal, double atestat, double zno, double extraBaly) {
         this.place = place;
         this.pib = pib;
         this.priority = priority;
@@ -34,7 +35,6 @@ public class ApplyDAO {
         this.atestat = atestat;
         this.zno = zno;
         this.extraBaly = extraBaly;
-        this.speciality = speciality;
     }
 
     public int getApplyId() {
@@ -102,18 +102,18 @@ public class ApplyDAO {
         this.extraBaly = extraBaly;
     }
 
-    public SpecialityDAO getSpeciality() {
+    /*public SpecialityDAO getSpeciality() {
         return speciality;
     }
 
     public void setSpeciality(SpecialityDAO speciality) {
         this.speciality = speciality;
-    }
+    }*/
 
     public ApplyDAO() {
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    /*@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "speciality_id")
-    private SpecialityDAO speciality;
+    private SpecialityDAO speciality;*/
 }

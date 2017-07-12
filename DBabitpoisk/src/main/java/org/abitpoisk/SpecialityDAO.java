@@ -9,11 +9,14 @@ import javax.persistence.*;
 @Table(name = "specialities")
 public class SpecialityDAO {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "speciality_id")
     private int specialityId;
     @Column(name = "okr")
     private String okr;
-    @Column(name = "direction")
+    @Column(name = "apply_href")
+    private String applyHref;
+    @Column(name = "direction", length = 500)
     private String direction;
     @Column(name = "applies")
     private int applies;
@@ -21,17 +24,38 @@ public class SpecialityDAO {
     private int allPlaces;
     @Column(name = "max_budget_places")
     private int maxBudgetPlaces;
+    @Column(name = "originals")
+    private int originals;
+
+
+
+    @Override
+    public String toString() {
+        return "SpecialityDAO{" +
+                "specialityId=" + specialityId +
+                ", okr='" + okr + '\'' +
+                ", applyHref='" + applyHref + '\'' +
+                ", direction='" + direction + '\'' +
+                ", applies=" + applies +
+                ", allPlaces=" + allPlaces +
+                ", maxBudgetPlaces=" + maxBudgetPlaces +
+                ", subjects='" + subjects + '\'' +
+                '}';
+    }
+
     @Column(name = "subjects")
     private String subjects;
 
-    public SpecialityDAO(String okr, String direction, int applies, int allPlaces, int maxBudgetPlaces, String subjects, UniversityDAO university) {
+    public SpecialityDAO(String okr,String applyHref, String direction, int applies, int allPlaces, int maxBudgetPlaces,int originals, String subjects) {
         this.okr = okr;
+        this.applyHref = applyHref;
         this.direction = direction;
         this.applies = applies;
         this.allPlaces = allPlaces;
         this.maxBudgetPlaces = maxBudgetPlaces;
+        this.originals = originals;
         this.subjects = subjects;
-        this.university = university;
+
     }
 
     public int getSpecialityId() {
@@ -90,19 +114,32 @@ public class SpecialityDAO {
     public void setSubjects(String subjects) {
         this.subjects = subjects;
     }
+    public String getApplyHref() {
+        return applyHref;
+    }
 
-    public UniversityDAO getUniversity() {
+    public void setApplyHref(String applyHref) {
+        this.applyHref = applyHref;
+    }
+    public int getOriginals() {
+        return originals;
+    }
+
+    public void setOriginals(int originals) {
+        this.originals = originals;
+    }
+    /*public UniversityDAO getUniversity() {
         return university;
     }
 
     public void setUniversity(UniversityDAO university) {
         this.university = university;
-    }
+    }*/
 
     public SpecialityDAO() {
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    /*@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "university_id")
-    private UniversityDAO university;
+    private UniversityDAO university;*/
 }

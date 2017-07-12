@@ -9,24 +9,39 @@ import javax.persistence.*;
 @Table(name="universities")
 public class UniversityDAO {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="university_id")
     private int universityId;
+    @Column(name = "university_href")
+    private String universityHref;
     @Column(name="university_name")
     private String universityName;
     @Column(name="max_budget_places")
     private int maxBudgetPlaces;
 
-    public UniversityDAO(String universityName, int maxBudgetPlaces, int allPlaces, int applies, int originals ,RegionDAO region) {
+    @Override
+    public String toString() {
+        return "UniversityDAO{" +
+                "universityId=" + universityId +
+                ", universityHref='" + universityHref + '\'' +
+                ", universityName='" + universityName + '\'' +
+                ", maxBudgetPlaces=" + maxBudgetPlaces +
+                ", allPlaces=" + allPlaces +
+                ", applies=" + applies +
+                ", originals=" + originals +
+                '}';
+    }
+
+    public UniversityDAO(String universityHref, String universityName, int maxBudgetPlaces, int allPlaces, int applies, int originals) {
+        this.universityHref = universityHref;
         this.universityName = universityName;
         this.maxBudgetPlaces = maxBudgetPlaces;
         this.allPlaces = allPlaces;
         this.applies = applies;
         this.originals = originals;
-        this.region = region;
     }
 
     @Column(name="all_places")
-
     private int allPlaces;
     @Column(name="applies")
     private int applies;
@@ -36,9 +51,9 @@ public class UniversityDAO {
     public UniversityDAO() {
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    /*@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "region_id")
-    private RegionDAO region;
+    private RegionDAO region;*/
 
     public int getUniversityId() {
         return universityId;
@@ -88,11 +103,18 @@ public class UniversityDAO {
         this.originals = originals;
     }
 
-    public RegionDAO getRegion() {
+    /*public RegionDAO getRegion() {
         return region;
     }
 
     public void setRegion(RegionDAO region) {
         this.region = region;
+    }*/
+    public String getUniversityHref() {
+        return universityHref;
+    }
+
+    public void setUniversityHref(String universityHref) {
+        this.universityHref = universityHref;
     }
 }
