@@ -13,6 +13,22 @@ public class RegionDAO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "region_id")
     private int regionId;
+    @Column(name = "region_href")
+    private String regionHref;
+
+    @Override
+    public String toString() {
+        return "RegionDAO{" +
+                "regionId=" + regionId +
+                ", regionHref='" + regionHref + '\'' +
+                ", regionName='" + regionName + '\'' +
+                ", maxBudgetPlaces=" + maxBudgetPlaces +
+                ", allPlaces=" + allPlaces +
+                ", applies=" + applies +
+                ", originals=" + originals +
+                '}';
+    }
+
     @Column(name = "region_name")
     private String regionName;
     @Column(name = "max_budget_places")
@@ -27,8 +43,8 @@ public class RegionDAO {
     public RegionDAO() {
     }
 
-    public RegionDAO(String regionName, int maxBudgetPlaces, int allPlaces, int applies, int originals) {
-
+    public RegionDAO(String regionHref, String regionName, int maxBudgetPlaces, int allPlaces, int applies, int originals) {
+        this.regionHref = regionHref;
         this.regionName = regionName;
         this.maxBudgetPlaces = maxBudgetPlaces;
         this.allPlaces = allPlaces;
@@ -83,5 +99,12 @@ public class RegionDAO {
 
     public void setOriginals(int originals) {
         this.originals = originals;
+    }
+    public String getRegionHref() {
+        return regionHref;
+    }
+
+    public void setRegionHref(String regionHref) {
+        this.regionHref = regionHref;
     }
 }
