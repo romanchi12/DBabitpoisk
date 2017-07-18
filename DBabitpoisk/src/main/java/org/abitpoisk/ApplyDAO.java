@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "applies")
 public class ApplyDAO {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "apply_id")
     private int applyId;
     @Column(name = "place")
@@ -17,24 +18,42 @@ public class ApplyDAO {
     private String pib;
     @Column(name = "priority")
     private String priority;
-    @Column(name = "bal")
-    private double bal;
-    @Column(name = "atestat")
-    private double atestat;
-    @Column(name = "zno")
-    private double zno;
-    @Column(name = "extra_baly")
-    private double extraBaly;
+    @Column(name = "documents")
+    private boolean documents;
 
-    public ApplyDAO( int place, String pib, String priority, double bal, double atestat, double zno, double extraBaly, SpecialityDAO speciality) {
+    @Override
+    public String toString() {
+        return "ApplyDAO{" +
+                "applyId=" + applyId +
+                ", place=" + place +
+                ", pib='" + pib + '\'' +
+                ", priority='" + priority + '\'' +
+                ", documents=" + documents +
+                ", bal=" + bal +
+                ", atestat=" + atestat +
+                ", zno=" + zno +
+                ", extraBaly=" + extraBaly +
+                '}';
+    }
+
+    @Column(name = "bal")
+    private String bal;
+    @Column(name = "atestat")
+    private String atestat;
+    @Column(name = "zno")
+    private String zno;
+    @Column(name = "extra_baly")
+    private String extraBaly;
+
+    public ApplyDAO( int place, String pib, String priority, String documents, String bal, String atestat, String zno, String extraBaly) {
         this.place = place;
         this.pib = pib;
         this.priority = priority;
+        this.documents = documents.equals("+") ? true : false;
         this.bal = bal;
         this.atestat = atestat;
         this.zno = zno;
         this.extraBaly = extraBaly;
-        this.speciality = speciality;
     }
 
     public int getApplyId() {
@@ -70,50 +89,55 @@ public class ApplyDAO {
         this.priority = priority;
     }
 
-    public double getBal() {
+    public String getBal() {
         return bal;
     }
 
-    public void setBal(double bal) {
+    public void setBal(String bal) {
         this.bal = bal;
     }
 
-    public double getAtestat() {
+    public String getAtestat() {
         return atestat;
     }
-
-    public void setAtestat(double atestat) {
+    public void setAtestat(String atestat) {
         this.atestat = atestat;
     }
 
-    public double getZno() {
+    public String getZno() {
         return zno;
     }
 
-    public void setZno(double zno) {
+    public void setZno(String zno) {
         this.zno = zno;
     }
 
-    public double getExtraBaly() {
+    public String getExtraBaly() {
         return extraBaly;
     }
 
-    public void setExtraBaly(double extraBaly) {
+    public void setExtraBaly(String extraBaly) {
         this.extraBaly = extraBaly;
     }
+    public boolean isDocuments() {
+        return documents;
+    }
 
-    public SpecialityDAO getSpeciality() {
+    public void setDocuments(boolean documents) {
+        this.documents = documents;
+    }
+    /*public SpecialityDAO getSpeciality() {
         return speciality;
     }
 
     public void setSpeciality(SpecialityDAO speciality) {
         this.speciality = speciality;
-    }
+    }*/
 
     public ApplyDAO() {
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    /*@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "speciality_id")
-    private SpecialityDAO speciality;
+    private SpecialityDAO speciality;*/
 }
